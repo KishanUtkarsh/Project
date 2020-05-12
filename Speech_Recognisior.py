@@ -1,5 +1,6 @@
 import webbrowser as wb
 import speech_recognition as sr
+import datetime
 
 A = sr.Recognizer()
 A1 = sr.Recognizer()
@@ -69,12 +70,15 @@ def VoiceRecognition(x):
         except:
             print("speak Correctly......")
 
-
-with sr.Microphone() as source:
-    print("speak searching plateform:")
-    print("speak now:")
-    audio = A.listen(source,10)
-    x = A.recognize_google(audio)
-    print(x)
-
+try:
+    with sr.Microphone() as source:
+        print("speak searching plateform:")
+        print("speak now:")
+        print(datetime.datetime.now())
+        audio = A.listen(source,timeout=2, phrase_time_limit=2)
+        print(datetime.datetime.now())
+        x = A.recognize_google(audio)
+        print(x)
+except (KeyboardInterrupt):
+    print("Exiting...")
 VoiceRecognition(x)
